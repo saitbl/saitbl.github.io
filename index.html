@@ -311,12 +311,10 @@
     </style>
 </head>
 <body>
-
-    <!-- Фоновый эффект (z-index: 0, под всем контентом) -->
+    <!-- Фоновый эффект -->
     <div class="mouse-glow" id="mouseGlow"></div>
 
     <div class="container">
-        <!-- Шапка с CTA -->
         <section class="visible">
             <h1>Михаил Шишков</h1>
             <p class="subtitle">Fullstack веб-разработчик с 2018 года</p>
@@ -328,7 +326,6 @@
             </a>
         </section>
 
-        <!-- О подходе -->
         <section>
             <h2>Почему со мной удобно работать</h2>
             <ul class="benefits">
@@ -337,13 +334,37 @@
                 <li><strong>Прозрачность:</strong> Работаю официально как самозанятый (предоставляю чеки, работаю по договору).</li>
             </ul>
         </section>
-
-        <!-- Проекты -->
+       
         <section>
             <h2>Избранные проекты</h2>
-            <div class="projects-grid">
+            <div class="projects-grid">   
+
+                <div class="project-card">
+                    <img src="projects/shishkovdesign/screen.jpg" alt="Скриншот сайта shishkovdesign.ru" class="project-screenshot" loading="lazy">
+                    
+                    <div class="project-header">
+                        <span class="project-title">Портфолио Art Director</span>
+                        <span class="badge live">Рабочий сайт</span>
+                    </div>
+                    <div class="project-role">
+                        <p>Разработка персонального сайта для дизайн-директора с акцентом на типографику и презентацию сложных кейсов.</p>
+                        <ul>
+                            <li>Pixel-perfect верстка сложного дизайнерского макета.</li>
+                            <li>Реализация плавных анимаций и микровзаимодействий.</li>
+                            <li>Оптимизация загрузки контента и адаптация под все устройства.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">React</span>
+                    </div>
+                    <a href="https://shishkovdesign.ru/" class="btn" target="_blank">
+                        Перейти на сайт 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
                 
-                <!-- Проект 1: Архивный со скриншотом -->
                 <div class="project-card">
                     <img 
                         src="projects/re-grade/screen.jpg" 
@@ -358,15 +379,17 @@
                     <div class="project-role">
                         <p>Каталог и рейтинг застройщиков загородной недвижимости.</p>
                         <ul>
-                            <li>Разработка архитектуры и адаптивной верстки шаблона.</li>
-                            <li>Настройка сложной фильтрации и поиска по каталогу.</li>
+                            <li>Разработка архитектуры, логики и интерфейса сайта.</li>
+                            <li>Настройка сложной фильтрации и поиска по каталогу.</li>                            
                             <li>Оптимизация скорости загрузки страниц.</li>
+                            <li>Pixel-perfect верстка.</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
                         <span class="tech-tag">HTML/CSS</span>
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">1с-Битрикс</span>
                     </div>
                     <a href="https://saitbl.github.io/projects/re-grade/" class="btn" target="_blank">
                         Открыть демо-версию 
@@ -374,28 +397,32 @@
                     </a>
                 </div>
 
-                <!-- Проект 2: Рабочий (Заглушка для примера) -->
                 <div class="project-card">
-                    <!-- Когда будет скриншот — раскомментируйте и укажите путь -->
-                    <!-- <img src="projects/project2/screen.jpg" alt="Скриншот" class="project-screenshot" loading="lazy"> -->
+                    <img 
+                        src="projects/100franshiz/screen.jpg" 
+                        alt="Скриншот сайта 100franshiz — каталог франшиз" 
+                        class="project-screenshot"
+                        loading="lazy"
+                    >
                     <div class="project-header">
-                        <span class="project-title">Корпоративный портал "СтройМастер"</span>
-                        <span class="badge live">Рабочий сайт</span>
+                        <span class="project-title">Каталог франшиз "100 франшиз"</span>
+                        <span class="badge live">Архивная демо-копия</span>
                     </div>
                     <div class="project-role">
-                        <p>Миграция и доработка сайта строительной компании.</p>
+                        <p>Разработка сайта с 0.</p>
                         <ul>
-                            <li>Миграция сайта со старой CMS на 1С-Битрикс.</li>
-                            <li>Интеграция форм захвата с CRM Битрикс24 (создание лидов, постановка задач через REST API).</li>
+                            <li>Верстка и программирование интерфейса.</li>
+                            <li>Разработка архитектура и безнес-логики.</li>
+                            <li>Большой каталог с нетривиальной структурой. Сложный умный фильтр. Форма добавления франшиз</li>
                             <li>Написание ТЗ для дизайнера и контроль реализации.</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
-                        <span class="tech-tag">1С-Битрикс</span>
-                        <span class="tech-tag">Битрикс24 REST API</span>
-                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">1С-Битрикс</span>                        
+                        <span class="tech-tag">PHP, JS</span>
+                        <span class="tech-tag">Парсинг</span>
                     </div>
-                    <a href="https://example.com" class="btn" target="_blank">
+                    <a href="https://saitbl.github.io/projects/100franshiz/" class="btn" target="_blank">
                         Перейти на сайт 
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </a>
@@ -404,21 +431,20 @@
             </div>
         </section>
 
-        <!-- Контакты (якорь #contacts) -->
+        
         <section id="contacts">
             <h2>Связаться со мной</h2>
             <p style="margin-bottom: 1.5rem;">Обсудим ваш проект? Напишите мне, и я бесплатно оценю задачи и предложу оптимальное решение.</p>
             <div class="contacts-grid">
-                <!-- ЗАМЕНИТЕ ССЫЛКИ НА СВОИ -->
-                <a href="https://t.me/your_telegram" class="contact-link" target="_blank">
+                <a href="https://t.me/saitbl" class="contact-link" target="_blank">
                     <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.623 4.823-4.351c.192-.192-.054-.3-.297-.108l-5.965 3.759-2.568-.802c-.56-.176-.57-.56.117-.828l10.037-3.869c.466-.174.875.108.713.827z"/></svg>
                     <span>Telegram</span>
                 </a>
-                <a href="https://wa.me/79000000000" class="contact-link" target="_blank">
+                <a href="https://wa.me/79537908898" class="contact-link" target="_blank">
                     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     <span>WhatsApp</span>
                 </a>
-                <a href="mailto:your@email.com" class="contact-link">
+                <a href="mailto:saitbl@yandex.ru" class="contact-link">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     <span>Email</span>
                 </a>
@@ -426,7 +452,7 @@
         </section>
         
         <footer style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 4rem; padding-bottom: 2rem;">
-            © 2024 Михаил Шишков. Работает на чистом HTML/CSS/JS.
+            © 2024 Михаил Шишков.
         </footer>
     </div>
 
