@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михаил Шишков | Fullstack Веб-разработчик</title>
+    <meta name="description" content="Портфолио веб-разработчика Михаила Шишкова. 1С-Битрикс, Битрикс24, PHP, JS. Разработка, интеграции и оптимизация сайтов.">
+    <style>
+        /* --- 1. Базовые настройки и переменные --- */
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --success: #4ade80;
+            --info: #60a5fa;
+            --font-main: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. Wow-эффект: Фоновый свет, следующий за мышью --- */
+        .mouse-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Самый нижний слой */
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        /* --- 3. Типографика и Layout --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            position: relative;
+            z-index: 1; /* Весь контент выше пятна */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+
+        /* --- 4. CTA-кнопка в шапке --- */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #0b0f19;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #7dd3fc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.5);
+        }
+
+        .cta-button svg {
+            transition: transform 0.25s ease;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* --- 5. Секции и Анимация появления --- */
+        section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ul.benefits {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        ul.benefits li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        ul.benefits li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* --- 6. Карточки проектов --- */
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Скриншот проекта */
+        .project-screenshot {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .project-card:hover .project-screenshot {
+            transform: scale(1.02);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.live { background: rgba(74, 222, 128, 0.15); color: var(--success); border: 1px solid rgba(74, 222, 128, 0.3); }
+        .badge.archive { background: rgba(96, 165, 250, 0.15); color: var(--info); border: 1px solid rgba(96, 165, 250, 0.3); }
+
+        .project-role {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .project-role ul {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+        
+        .project-role li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .project-role li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #0b0f19;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #7dd3fc;
+            transform: translateX(4px);
+        }
+
+        /* --- 7. Контакты --- */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .contact-link svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent);
+        }
+
+        /* --- 8. Адаптивность --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 2rem 1rem; }
+            .project-header { flex-direction: column; }
+            .project-screenshot { height: 160px; }
+            .cta-button { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фоновый эффект (z-index: 0, под всем контентом) -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <div class="container">
+        <!-- Шапка с CTA -->
+        <section class="visible">
+            <h1>Михаил Шишков</h1>
+            <p class="subtitle">Fullstack веб-разработчик с 2018 года</p>
+            <p>Специализируюсь на создании и поддержке сайтов на <strong>1С-Битрикс</strong>, а также на сложных интеграциях, миграциях и доработках <strong>Битрикс24</strong>. Пишу на PHP и JavaScript.</p>
+            
+            <a href="#contacts" class="cta-button">
+                Обсудить проект
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </section>
+
+        <!-- О подходе -->
+        <section>
+            <h2>Почему со мной удобно работать</h2>
+            <ul class="benefits">
+                <li><strong>Понимаю бизнес-задачи:</strong> Не просто пишу код, а предлагаю решения. Умею оценивать сроки, декомпозировать задачи и писать понятные ТЗ, что экономит ваш бюджет и время.</li>
+                <li><strong>Комплексный подход:</strong> Благодаря опыту администрирования серверов, я уделяю внимание не только функционалу, но и скорости загрузки, безопасности и стабильной работе проекта.</li>
+                <li><strong>Прозрачность:</strong> Работаю официально как самозанятый (предоставляю чеки, работаю по договору).</li>
+            </ul>
+        </section>
+
+        <!-- Проекты -->
+        <section>
+            <h2>Избранные проекты</h2>
+            <div class="projects-grid">
+                
+                <!-- Проект 1: Архивный со скриншотом -->
+                <div class="project-card">
+                    <img 
+                        src="projects/re-grade/screen.jpg" 
+                        alt="Скриншот сайта Re-Grade — рейтинг застройщиков" 
+                        class="project-screenshot"
+                        loading="lazy"
+                    >
+                    <div class="project-header">
+                        <span class="project-title">Re-Grade</span>
+                        <span class="badge archive">Архивная демо-копия</span>
+                    </div>
+                    <div class="project-role">
+                        <p>Каталог и рейтинг застройщиков загородной недвижимости.</p>
+                        <ul>
+                            <li>Разработка архитектуры и адаптивной верстки шаблона.</li>
+                            <li>Настройка сложной фильтрации и поиска по каталогу.</li>
+                            <li>Оптимизация скорости загрузки страниц.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">PHP</span>
+                    </div>
+                    <a href="https://saitbl.github.io/projects/re-grade/" class="btn" target="_blank">
+                        Открыть демо-версию 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+
+                <!-- Проект 2: Рабочий (Заглушка для примера) -->
+                <div class="project-card">
+                    <!-- Когда будет скриншот — раскомментируйте и укажите путь -->
+                    <!-- <img src="projects/project2/screen.jpg" alt="Скриншот" class="project-screenshot" loading="lazy"> -->
+                    <div class="project-header">
+                        <span class="project-title">Корпоративный портал "СтройМастер"</span>
+                        <span class="badge live">Рабочий сайт</span>
+                    </div>
+                    <div class="project-role">
+                        <p>Миграция и доработка сайта строительной компании.</p>
+                        <ul>
+                            <li>Миграция сайта со старой CMS на 1С-Битрикс.</li>
+                            <li>Интеграция форм захвата с CRM Битрикс24 (создание лидов, постановка задач через REST API).</li>
+                            <li>Написание ТЗ для дизайнера и контроль реализации.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">1С-Битрикс</span>
+                        <span class="tech-tag">Битрикс24 REST API</span>
+                        <span class="tech-tag">PHP</span>
+                    </div>
+                    <a href="https://example.com" class="btn" target="_blank">
+                        Перейти на сайт 
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Контакты (якорь #contacts) -->
+        <section id="contacts">
+            <h2>Связаться со мной</h2>
+            <p style="margin-bottom: 1.5rem;">Обсудим ваш проект? Напишите мне, и я бесплатно оценю задачи и предложу оптимальное решение.</p>
+            <div class="contacts-grid">
+                <!-- ЗАМЕНИТЕ ССЫЛКИ НА СВОИ -->
+                <a href="https://t.me/your_telegram" class="contact-link" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.623 4.823-4.351c.192-.192-.054-.3-.297-.108l-5.965 3.759-2.568-.802c-.56-.176-.57-.56.117-.828l10.037-3.869c.466-.174.875.108.713.827z"/></svg>
+                    <span>Telegram</span>
+                </a>
+                <a href="https://wa.me/79000000000" class="contact-link" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="mailto:your@email.com" class="contact-link">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>Email</span>
+                </a>
+            </div>
+        </section>
+        
+        <footer style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 4rem; padding-bottom: 2rem;">
+            © 2024 Михаил Шишков. Работает на чистом HTML/CSS/JS.
+        </footer>
+    </div>
+
+    <script>
+        // 1. Wow-эффект: свечение, следующее за мышью
+        const glow = document.getElementById('mouseGlow');
+        let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            glow.style.opacity = '0';
+        });
+
+        // Плавная интерполяция для эффекта "следования"
+        function animateGlow() {
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+            glow.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
+            requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
+
+        // 2. Анимация появления секций при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
